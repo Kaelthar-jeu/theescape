@@ -449,6 +449,7 @@ const G = {
   apiKey:'', profil:'', phase:1, lieu:'Lieu inconnu',
   nbChoix:0, blessures:[], historique:[], saveTO:null, adminMode:false,
   ravisseursEnAlerte:false,
+  contraintes:'mains attachées derrière le dos, chevilles liées à la chaise', // état de contrainte physique actuel
   stats:{ sante:100, energie:100, douleur:0, lucidite:100, discretion:100 }
 };
 const PAYWALL = 20;
@@ -529,7 +530,7 @@ function afficherReprise(save){
 // ── SAVE ──
 function sauvegarder(){
   const d={profil:G.profil,phase:G.phase,lieu:G.lieu,nbChoix:G.nbChoix,
-    blessures:G.blessures,stats:G.stats,ravisseursEnAlerte:G.ravisseursEnAlerte,
+    blessures:G.blessures,stats:G.stats,ravisseursEnAlerte:G.ravisseursEnAlerte,contraintes:G.contraintes,
     historique:G.historique.slice(-20),date:new Date().toISOString()};
   localStorage.setItem('the_escape_save',JSON.stringify(d));
 }
@@ -540,7 +541,9 @@ function charger(){
 function fromSave(s){
   Object.assign(G,{profil:s.profil,phase:s.phase||1,lieu:s.lieu||'Lieu inconnu',
     nbChoix:s.nbChoix||0,blessures:s.blessures||[],
-    ravisseursEnAlerte:s.ravisseursEnAlerte||false,historique:s.historique||[]});
+    ravisseursEnAlerte:s.ravisseursEnAlerte||false,
+    contraintes:s.contraintes||'mains attachées derrière le dos, chevilles liées',
+    historique:s.historique||[]});
   if(s.stats)Object.assign(G.stats,s.stats);
 }
 function reinitialiser(){
@@ -627,6 +630,7 @@ ${profilDesc}
 Phase : ${G.phase}/5 — ${PHASES[G.phase-1]||''}
 Lieu : ${G.lieu}
 Ravisseurs en alerte : ${G.ravisseursEnAlerte?'OUI — surveillance renforcée':'Non'}
+État de contrainte physique : ${G.contraintes}
 
 === STATS ===
 Santé : ${s.sante}/100 | Énergie : ${s.energie}/100 | Douleur : ${s.douleur}/100
@@ -669,6 +673,24 @@ FIN MORT : mort après série de mauvais choix. Déclencher avec [ FIN: MORT ]
 5. JAMAIS une bonne réponse évidente parmi les 4 choix.
 6. INTERDIT de proposer un choix utilisant un objet ou compétence absent de la situation.
 
+=== COHÉRENCE PHYSIQUE — RÈGLE CRITIQUE ===
+L'état de contrainte physique actuel est : ${G.contraintes}
+
+RÈGLE ABSOLUE : les choix proposés doivent être STRICTEMENT compatibles avec cet état physique.
+Exemples concrets :
+- Mains attachées DERRIÈRE le dos → IMPOSSIBLE de fouiller ses poches, d'attraper un objet devant soi, d'utiliser ses mains normalement.
+- Mains attachées DEVANT → peut fouiller les poches, attraper des objets proches, mais ne peut pas lever les bras librement.
+- Chevilles liées → IMPOSSIBLE de courir, de donner un coup de pied efficace, de se lever rapidement.
+- Assis attaché à une chaise → IMPOSSIBLE de se déplacer sans d'abord se libérer de la chaise.
+- Yeux bandés → IMPOSSIBLE de voir, de lire, d'identifier visuellement quoi que ce soit.
+
+AVANT de proposer chaque choix, vérifier mentalement : est-ce physiquement possible dans l'état actuel ?
+Si la réponse est non → ne pas proposer ce choix.
+
+Quand l'état de contrainte change (une main libérée, chevilles déliées, etc.), mettre à jour avec :
+[ Contrainte: nouvel état précis ]
+Exemples : [ Contrainte: mains libres, chevilles encore liées ] ou [ Contrainte: complètement libre ]
+
 === FORMAT OBLIGATOIRE ===
 Narration (120-180 mots, style Lee Child)
 
@@ -685,6 +707,7 @@ Narration (120-180 mots, style Lee Child)
 [ Blessure: description courte ] pour ajouter une blessure
 [ Blessure-soignée: description ] pour retirer une blessure soignée
 [ Phase: X ] [ Lieu: description ]
+[ Contrainte: description exacte ] quand l'état de contrainte change
 [ ALERTE ] / [ ALERTE-FIN ]
 
 === PAYWALL ===
@@ -732,6 +755,12 @@ function parserReponse(texte){
   });
 
   // Alerte ravisseurs
+  // Contrainte physique
+  texte=texte.replace(/\[\s*Contrainte\s*:\s*([^\]]+)\s*\]/gi,(_,c)=>{
+    G.contraintes=c.trim();
+    mises.push('[État: '+c.trim()+']');return '';
+  });
+
   if(/\[\s*ALERTE\s*\]/i.test(texte)&&!/ALERTE-FIN/i.test(texte)){
     texte=texte.replace(/\[\s*ALERTE\s*\]/gi,'');
     G.ravisseursEnAlerte=true;
