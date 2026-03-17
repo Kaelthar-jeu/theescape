@@ -128,13 +128,30 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .header-droite{display:flex;align-items:center;gap:14px;}
 .phase-tag{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:#fff;background:var(--orange-dim);padding:3px 10px;text-transform:uppercase;}
 .sauv{font-family:var(--mono);font-size:10px;color:var(--texte-dim);}
+
+/* Panneau déroulant */
+.te-panel-btn{background:none;border:1px solid var(--border);color:var(--texte-dim);font-family:var(--mono);font-size:10px;padding:3px 9px;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
+.te-panel-btn:hover{border-color:var(--orange-vif);color:var(--orange-vif);}
+#te-panel{display:none;background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 0;}
+#te-panel.open{display:block;}
+.te-panel-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
+.te-bloc-title{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--texte-dim);border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:8px;}
+.te-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;}
+.te-key{color:var(--texte-dim);font-family:var(--mono);}
+.te-val{color:var(--orange);font-family:var(--mono);font-weight:500;}
+.te-barre-wrap{background:var(--bg4);height:3px;margin-top:2px;margin-bottom:5px;overflow:hidden;}
+.te-barre{height:100%;background:var(--orange);transition:width 0.4s ease;}
+.te-alerte{background:var(--rouge);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:4px 8px;text-align:center;display:none;}
+.te-alerte.visible{display:block;}
+.te-blessure{font-size:11px;color:var(--orange-vif);font-family:var(--mono);padding:2px 0;}
+@media(max-width:600px){.te-panel-inner{grid-template-columns:1fr 1fr;}}
 .sauv.ok{color:var(--vert);}
 .sauv.cours{color:var(--orange);}
 
-.main{display:flex;flex:1;gap:14px;padding:14px 0;min-height:0;}
+.main{display:block;flex:1;padding:14px 0;min-height:0;}
 
 /* ── PANNEAU SURVIE ── */
-.survie-panel{width:220px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:calc(100vh - 80px);position:sticky;top:0;}
+.survie-panel{display:none;}
 .sv-bloc{background:var(--bg2);border:1px solid var(--border);position:relative;z-index:5;}
 .sv-titre{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--texte-dim);background:var(--bg3);padding:5px 12px;border-bottom:1px solid var(--border);}
 .sv-inner{padding:12px 14px;}
@@ -205,8 +222,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 @media(max-width:700px){
   #app{padding:0 8px;}
   .main{flex-direction:column;gap:8px;padding:8px 0;}
-  .survie-panel{width:100%;max-height:none;position:static;flex-direction:row;flex-wrap:wrap;gap:8px;overflow:visible;}
-  .survie-panel > div{min-width:140px;flex:1;}
+
   #recit{min-height:260px;max-height:48vh;padding:14px;}
   .entree p{font-size:15px;}
   .logo{font-size:16px;}
@@ -384,8 +400,50 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
     <div class="header-droite">
       <div class="phase-tag" id="phase-tag">Phase 1</div>
       <div class="sauv" id="sauv-ind">● prêt</div>
+      <button class="te-panel-btn" onclick="toggleTePanel()">Survie ▾</button>
     </div>
   </header>
+
+  <!-- Panneau déroulant -->
+  <div id="te-panel">
+    <div class="te-alerte" id="te-alerte-bloc">⚠ RAVISSEURS EN ALERTE</div>
+    <div class="te-panel-inner">
+
+      <div>
+        <div class="te-bloc-title">Situation</div>
+        <div class="te-row"><span class="te-key" id="te-profil">—</span></div>
+        <div class="te-row"><span class="te-key" id="te-phase">Phase 1 — L'éveil</span></div>
+        <div class="te-row"><span class="te-key" id="te-lieu">Lieu inconnu</span></div>
+        <div class="te-row"><span class="te-key">Contraintes</span></div>
+        <div style="font-size:10px;color:var(--orange);font-family:var(--mono);margin-top:2px;" id="te-contraintes">—</div>
+      </div>
+
+      <div>
+        <div class="te-bloc-title">État physique</div>
+        <div class="te-row"><span class="te-key">Santé</span><span class="te-val" id="te-sante">100</span></div>
+        <div class="te-barre-wrap"><div class="te-barre" id="te-b-sante" style="width:100%;background:var(--vert);"></div></div>
+        <div class="te-row"><span class="te-key">Énergie</span><span class="te-val" id="te-energie">100</span></div>
+        <div class="te-barre-wrap"><div class="te-barre" id="te-b-energie" style="width:100%;"></div></div>
+        <div class="te-row"><span class="te-key">Douleur</span><span class="te-val" id="te-douleur">0</span></div>
+        <div class="te-barre-wrap"><div class="te-barre" id="te-b-douleur" style="width:0%;background:var(--rouge);"></div></div>
+      </div>
+
+      <div>
+        <div class="te-bloc-title">État mental</div>
+        <div class="te-row"><span class="te-key">Lucidité</span><span class="te-val" id="te-lucidite">100</span></div>
+        <div class="te-barre-wrap"><div class="te-barre" id="te-b-lucidite" style="width:100%;"></div></div>
+        <div class="te-row"><span class="te-key">Discrétion</span><span class="te-val" id="te-discretion">100</span></div>
+        <div class="te-barre-wrap"><div class="te-barre" id="te-b-discretion" style="width:100%;background:var(--beton-clair);"></div></div>
+      </div>
+
+      <div>
+        <div class="te-bloc-title">Blessures</div>
+        <div id="te-blessures"><div style="font-size:11px;color:var(--texte-dim);font-style:italic;">Aucune</div></div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="main">
     <div class="survie-panel">
 
@@ -562,13 +620,36 @@ function setSI(e){
 }
 
 // ── UI ──
+function toggleTePanel(){
+  const p=document.getElementById('te-panel');
+  const b=document.querySelector('.te-panel-btn');
+  p.classList.toggle('open');
+  if(b)b.textContent=p.classList.contains('open')?'Survie ▴':'Survie ▾';
+}
+
 function miseAJourUI(){
   const ph=G.phase;
+  // Panneau déroulant
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const setW=(id,w,col)=>{const e=document.getElementById(id);if(e){e.style.width=w+'%';if(col)e.style.background=col;}};
+  set('te-profil',G.profil||'—');
+  set('te-phase',`Phase ${ph} — ${PHASES[ph-1]||''}`);
+  set('te-lieu',G.lieu);
+  set('te-contraintes',G.contraintes||'—');
+  const s=G.stats;
+  set('te-sante',s.sante);setW('te-b-sante',s.sante,s.sante>60?'var(--vert)':s.sante>30?'var(--orange)':'var(--rouge)');
+  set('te-energie',s.energie);setW('te-b-energie',s.energie,s.energie>50?'var(--orange)':'var(--rouge)');
+  set('te-douleur',s.douleur);setW('te-b-douleur',s.douleur,'var(--rouge)');
+  set('te-lucidite',s.lucidite);setW('te-b-lucidite',s.lucidite,s.lucidite>60?'var(--orange)':'var(--rouge)');
+  set('te-discretion',s.discretion);setW('te-b-discretion',s.discretion,'var(--beton-clair)');
+  const blDm=document.getElementById('te-blessures');
+  if(blDm){blDm.innerHTML=G.blessures.length?G.blessures.map(b=>`<div class="te-blessure">⚡ ${b}</div>`).join(''):'<div style="font-size:11px;color:var(--texte-dim);font-style:italic;">Aucune</div>';}
+  const alerteDm=document.getElementById('te-alerte-bloc');
+  if(alerteDm)alerteDm.classList.toggle('visible',G.ravisseursEnAlerte);
   document.getElementById('phase-tag').textContent='Phase '+ph;
   document.getElementById('p-profil').textContent=G.profil||'—';
   document.getElementById('p-phase').textContent=`Phase ${ph} — ${PHASES[ph-1]||''}`;
   document.getElementById('p-lieu').textContent=G.lieu;
-  const s=G.stats;
   document.getElementById('s-sante').textContent=s.sante;
   document.getElementById('b-sante').style.width=s.sante+'%';
   document.getElementById('b-sante').style.background=s.sante>60?'var(--vert)':s.sante>30?'var(--orange)':'var(--rouge)';
