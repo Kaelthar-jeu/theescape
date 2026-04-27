@@ -21,40 +21,14 @@
   --corps:'Source Serif 4',Georgia,serif;
 }
 html,body{height:100%;background:var(--bg);color:var(--texte);font-family:var(--corps);font-size:16px;line-height:1.7;overflow-x:hidden;}
-
-/* Texture beton */
-body::before{content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;}
-
-/* ── BARRE STUDIO ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
 .studio-bar{position:relative;z-index:10;background:#060605;border-bottom:2px solid var(--orange-dim);padding:6px 16px;text-align:center;}
 .studio-bar a{color:var(--texte-dim);font-size:11px;text-decoration:none;letter-spacing:3px;font-family:var(--mono);transition:color 0.2s;}
 .studio-bar a:hover{color:var(--orange);}
 
-/* ── ÉCRAN INTRO ── */
-#ecran-intro{
-  position:fixed;inset:0;z-index:300;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:24px;overflow:hidden;
-}
-/* Fond béton avec fissure */
-#ecran-intro::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,#0a0a08 0%,#0f0d0b 50%,#080807 100%);
-  background-image:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.008) 60px,rgba(255,255,255,0.008) 61px),
-    repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.008) 60px,rgba(255,255,255,0.008) 61px);}
-
-<svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-  <!-- Ombres béton -->
-  <rect x="0" y="0" width="800" height="600" fill="url(#beton-grad)"/>
-  <defs>
-    <linearGradient id="beton-grad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(0,0,0,0.3)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,0.6)"/>
-    </linearGradient>
-  </defs>
-</svg>
-
+/* INTRO */
+#ecran-intro{position:fixed;inset:0;z-index:300;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
+#ecran-intro::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0a0a08 0%,#0f0d0b 50%,#080807 100%);background-image:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.008) 60px,rgba(255,255,255,0.008) 61px),repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.008) 60px,rgba(255,255,255,0.008) 61px);}
 .intro-inner{max-width:520px;width:100%;text-align:left;position:relative;z-index:1;}
 .intro-ref{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:20px;animation:app 0.7s ease 0.1s both;}
 .intro-the{font-family:var(--titre);font-size:clamp(20px,5vw,32px);font-weight:300;color:var(--beton-clair);letter-spacing:8px;text-transform:uppercase;line-height:1;animation:app 0.7s ease 0.2s both;}
@@ -69,19 +43,14 @@ body::before{content:'';position:fixed;inset:0;
 .btn-intro-s:hover{border-color:var(--orange-dim);color:var(--texte);}
 @keyframes app{from{opacity:0;transform:translateX(-16px);}to{opacity:1;transform:translateX(0);}}
 
-/* ── ÉCRAN SETUP ── */
-#ecran-setup{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;
-}
+/* SETUP */
+#ecran-setup{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px;}
 .setup-wrap{max-width:600px;margin:auto;padding:40px 0;}
 .setup-entete{margin-bottom:36px;padding-bottom:16px;border-bottom:2px solid var(--orange-dim);}
 .setup-ref{font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
 .setup-titre{font-family:var(--titre);font-size:32px;font-weight:700;color:var(--texte-clair);letter-spacing:1px;text-transform:uppercase;}
 .setup-bloc{margin-bottom:28px;}
 .setup-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--texte-dim);display:block;margin-bottom:8px;}
-
-/* Profils */
 .profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .profil-carte{background:var(--bg3);border:2px solid var(--border);padding:16px 14px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
 .profil-carte::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--beton);transition:background 0.2s;}
@@ -91,20 +60,11 @@ body::before{content:'';position:fixed;inset:0;
 .profil-nom{font-family:var(--titre);font-size:16px;font-weight:600;color:var(--texte-clair);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
 .profil-stat{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
 .profil-desc{font-family:var(--corps);font-size:12px;font-style:italic;color:var(--texte-dim);line-height:1.5;}
-
-.checkbox-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;margin-top:8px;}
-.checkbox-wrap input{accent-color:var(--orange);cursor:pointer;}
-.checkbox-label{font-family:var(--mono);font-size:10px;color:var(--texte-dim);letter-spacing:1px;}
-
-.setup-input{width:100%;background:var(--bg3);border:none;border-bottom:2px solid var(--border2);color:var(--texte-clair);font-family:var(--mono);font-size:14px;padding:10px 0;outline:none;transition:border-color 0.2s;border-radius:0;}
-.setup-input:focus{border-bottom-color:var(--orange);}
-.setup-input::placeholder{color:var(--texte-dim);}
-
 .btn-setup{width:100%;background:var(--orange);border:none;color:#fff;font-family:var(--titre);font-size:15px;font-weight:600;letter-spacing:4px;padding:16px;cursor:pointer;transition:background 0.2s;text-transform:uppercase;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));margin-top:8px;}
 .btn-setup:hover{background:var(--orange-vif);}
 .btn-setup:disabled{background:var(--beton);cursor:not-allowed;clip-path:none;}
 
-/* ── REPRISE ── */
+/* REPRISE */
 #ecran-reprise{display:none;position:fixed;inset:0;z-index:250;background:rgba(10,10,8,0.97);align-items:center;justify-content:center;padding:20px;}
 .reprise-box{background:var(--bg2);border:1px solid var(--border2);border-left:4px solid var(--orange);max-width:420px;width:100%;padding:36px;}
 .reprise-ref{font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
@@ -120,7 +80,7 @@ body::before{content:'';position:fixed;inset:0;
 .rbn{background:var(--bg3);color:var(--texte-dim);border:1px solid var(--border2);}
 .rbn:hover{border-color:var(--orange-dim);color:var(--texte);}
 
-/* ── APP ── */
+/* APP */
 #app{display:flex;flex-direction:column;min-height:100vh;max-width:1160px;margin:0 auto;padding:0 16px;position:relative;z-index:1;}
 header{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:2px solid var(--orange-dim);flex-shrink:0;}
 .logo{font-family:var(--titre);font-size:20px;font-weight:700;letter-spacing:2px;color:var(--texte-clair);text-transform:uppercase;}
@@ -128,6 +88,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .header-droite{display:flex;align-items:center;gap:14px;}
 .phase-tag{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:#fff;background:var(--orange-dim);padding:3px 10px;text-transform:uppercase;}
 .sauv{font-family:var(--mono);font-size:10px;color:var(--texte-dim);}
+.sauv.ok{color:var(--vert);}
+.sauv.cours{color:var(--orange);}
 
 /* Panneau déroulant */
 .te-panel-btn{background:none;border:1px solid var(--border);color:var(--texte-dim);font-family:var(--mono);font-size:10px;padding:3px 9px;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
@@ -145,12 +107,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .te-alerte.visible{display:block;}
 .te-blessure{font-size:11px;color:var(--orange-vif);font-family:var(--mono);padding:2px 0;}
 @media(max-width:600px){.te-panel-inner{grid-template-columns:1fr 1fr;}}
-.sauv.ok{color:var(--vert);}
-.sauv.cours{color:var(--orange);}
 
 .main{display:block;flex:1;padding:14px 0;min-height:0;}
 
-/* ── PANNEAU SURVIE ── */
+/* PANNEAU SURVIE */
 .survie-panel{display:none;}
 .sv-bloc{background:var(--bg2);border:1px solid var(--border);position:relative;z-index:5;}
 .sv-titre{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--texte-dim);background:var(--bg3);padding:5px 12px;border-bottom:1px solid var(--border);}
@@ -163,66 +123,50 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .sv-barre.rouge{background:var(--rouge);}
 .sv-barre.vert{background:var(--vert);}
 .sv-barre.beton{background:var(--beton-clair);}
-
 .perso-bloc{padding:14px;text-align:center;border-left:3px solid var(--orange-dim);}
 .perso-profil{font-family:var(--titre);font-size:18px;font-weight:600;color:var(--texte-clair);letter-spacing:1px;text-transform:uppercase;}
 .perso-phase{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--orange);text-transform:uppercase;margin-top:3px;}
 .perso-lieu{font-family:var(--mono);font-size:9px;color:var(--texte-dim);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
-
 .blessure-item{font-family:var(--mono);font-size:10px;color:var(--rouge);padding:3px 0;border-bottom:1px solid var(--border);line-height:1.4;}
 .blessure-item:last-child{border-bottom:none;}
 .blessure-vide{font-family:var(--mono);font-size:10px;color:var(--border2);font-style:italic;}
-
 .alerte-bloc{background:rgba(138,24,24,0.12);border:1px solid var(--rouge);padding:10px 12px;text-align:center;}
 .alerte-txt{font-family:var(--mono);font-size:10px;color:var(--rouge);letter-spacing:1px;text-transform:uppercase;}
-
 .btn-prem{width:100%;padding:11px;background:linear-gradient(135deg,var(--orange-dim),var(--beton));color:#fff;border:none;font-family:var(--mono);font-size:9px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;transition:opacity 0.2s;}
 .btn-prem:hover{opacity:0.85;}
 
-/* ── PANNEAU JEU ── */
+/* JEU */
 .jeu-panel{flex:1;display:flex;flex-direction:column;min-width:0;gap:10px;position:relative;z-index:5;}
 #recit{flex:1;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--orange-dim);padding:22px;overflow-y:auto;min-height:calc(100vh - 140px);position:relative;z-index:5;}
 .entree{margin-bottom:22px;animation:fadeIn 0.35s ease;position:relative;z-index:5;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 .entree p{font-family:var(--corps);font-size:21px;line-height:1.9;color:var(--texte-clair);margin-bottom:10px;}
 .action-joueur{font-family:var(--mono);font-size:11px;color:var(--texte-dim);padding:7px 12px;border-left:3px solid var(--orange-dim);margin-bottom:12px;background:rgba(200,90,16,0.04);}
-
-/* Alerte tension */
 .tension-bloc{background:rgba(138,24,24,0.1);border:1px solid var(--rouge);border-left:4px solid var(--rouge);padding:14px 16px;margin:10px 0;}
 .tension-header{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--rouge);text-transform:uppercase;margin-bottom:6px;}
 .tension-texte{font-family:var(--corps);font-size:13px;font-style:italic;color:var(--texte-clair);line-height:1.7;}
-
 .maj-stats{font-family:var(--mono);font-size:11px;color:var(--orange);padding:6px 10px;background:rgba(200,90,16,0.06);border-left:2px solid var(--orange-dim);margin-top:8px;letter-spacing:1px;}
 .sep{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .curseur{display:inline-block;width:2px;height:14px;background:var(--orange);animation:clign 0.7s infinite;vertical-align:text-bottom;margin-left:2px;}
 @keyframes clign{0%,50%{opacity:1;}51%,100%{opacity:0;}}
-
-/* Choix */
 .choix-bloc{background:var(--bg3);border:1px solid var(--border2);border-top:3px solid var(--orange);padding:14px 16px;margin-top:12px;position:relative;z-index:10;}
 .choix-titre{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--texte-dim);margin-bottom:10px;}
 .choix-btn{display:block;width:100%;text-align:left;background:var(--bg2);border:1px solid var(--border);border-left:3px solid transparent;color:var(--texte-clair);font-family:var(--corps);font-size:18px;padding:14px 14px;margin-bottom:7px;cursor:pointer;transition:all 0.2s;line-height:1.5;position:relative;z-index:10;pointer-events:auto;}
 .choix-btn:hover{background:rgba(200,90,16,0.1);border-left-color:var(--orange);border-color:var(--orange-dim);}
 .choix-btn:last-child{margin-bottom:0;}
-
-/* Fin */
 .fin-bloc{border:2px solid var(--orange);padding:24px;margin:12px 0;}
 .fin-type{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--texte-dim);text-transform:uppercase;margin-bottom:8px;}
 .fin-titre{font-family:var(--titre);font-size:24px;font-weight:700;color:var(--texte-clair);text-transform:uppercase;margin-bottom:12px;letter-spacing:1px;}
 .fin-texte{font-family:var(--corps);font-size:14px;font-style:italic;color:var(--texte);line-height:1.8;}
 .fin-restart{margin-top:16px;background:var(--orange);border:none;color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:10px 24px;cursor:pointer;text-transform:uppercase;transition:background 0.2s;}
 .fin-restart:hover{background:var(--orange-vif);}
-
-/* Scrollbar */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--beton);border-radius:2px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--orange-dim);}
-
-/* Mobile */
 @media(max-width:700px){
   #app{padding:0 8px;}
   .main{flex-direction:column;gap:8px;padding:8px 0;}
-
   #recit{min-height:calc(100vh - 160px);padding:16px;}
   .entree p{font-size:19px;line-height:1.85;}
   .choix-btn{font-size:17px;padding:14px 12px;}
@@ -241,73 +185,24 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 <div id="ecran-intro">
   <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="bg-te" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0a0a08"/>
-        <stop offset="100%" stop-color="#060605"/>
-      </linearGradient>
-      <radialGradient id="lum-te" cx="20%" cy="60%" r="50%">
-        <stop offset="0%" stop-color="rgba(200,90,16,0.12)"/>
-        <stop offset="100%" stop-color="transparent"/>
-      </radialGradient>
+      <linearGradient id="bg-te" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a08"/><stop offset="100%" stop-color="#060605"/></linearGradient>
+      <radialGradient id="lum-te" cx="20%" cy="60%" r="50%"><stop offset="0%" stop-color="rgba(200,90,16,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
     </defs>
-    <rect width="800" height="600" fill="url(#bg-te)"/>
-    <rect width="800" height="600" fill="url(#lum-te)"/>
-    <!-- Murs béton -->
-    <rect x="0" y="0" width="800" height="600" fill="none" stroke="rgba(58,58,54,0.3)" stroke-width="0.5"/>
-    <!-- Blocs béton fond -->
-    <rect x="0" y="0" width="200" height="120" fill="rgba(20,20,18,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/>
-    <rect x="200" y="0" width="200" height="120" fill="rgba(18,18,16,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/>
-    <rect x="400" y="0" width="200" height="120" fill="rgba(22,22,20,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/>
-    <rect x="600" y="0" width="200" height="120" fill="rgba(19,19,17,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/>
-    <rect x="0" y="120" width="200" height="120" fill="rgba(21,21,19,0.5)" stroke="rgba(40,40,36,0.3)" stroke-width="1"/>
-    <rect x="200" y="120" width="200" height="120" fill="rgba(17,17,15,0.5)" stroke="rgba(40,40,36,0.3)" stroke-width="1"/>
-    <rect x="400" y="120" width="200" height="120" fill="rgba(20,20,18,0.5)" stroke="rgba(40,40,36,0.3)" stroke-width="1"/>
-    <rect x="600" y="120" width="200" height="120" fill="rgba(18,18,16,0.5)" stroke="rgba(40,40,36,0.3)" stroke-width="1"/>
-    <!-- Fissures dans le béton -->
-    <path d="M120,0 L118,45 L124,80 L119,120" stroke="rgba(200,90,16,0.15)" stroke-width="1.5" fill="none"/>
-    <path d="M350,30 L348,60 L355,90" stroke="rgba(200,90,16,0.1)" stroke-width="1" fill="none"/>
-    <path d="M580,10 L583,55 L578,100 L582,140" stroke="rgba(200,90,16,0.12)" stroke-width="1.5" fill="none"/>
-    <!-- Tuyaux industriels -->
+    <rect width="800" height="600" fill="url(#bg-te)"/><rect width="800" height="600" fill="url(#lum-te)"/>
+    <rect x="0" y="0" width="200" height="120" fill="rgba(20,20,18,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/><rect x="200" y="0" width="200" height="120" fill="rgba(18,18,16,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/><rect x="400" y="0" width="200" height="120" fill="rgba(22,22,20,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/><rect x="600" y="0" width="200" height="120" fill="rgba(19,19,17,0.6)" stroke="rgba(40,40,36,0.4)" stroke-width="1"/>
+    <path d="M120,0 L118,45 L124,80 L119,120" stroke="rgba(200,90,16,0.15)" stroke-width="1.5" fill="none"/><path d="M580,10 L583,55 L578,100 L582,140" stroke="rgba(200,90,16,0.12)" stroke-width="1.5" fill="none"/>
     <rect x="0" y="230" width="800" height="8" fill="rgba(40,40,36,0.8)" rx="2"/>
-    <rect x="0" y="242" width="800" height="4" fill="rgba(30,30,28,0.6)" rx="1"/>
-    <!-- Vis/boulons sur les tuyaux -->
-    <circle cx="80" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <circle cx="160" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <circle cx="320" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <circle cx="480" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <circle cx="640" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <circle cx="720" cy="234" r="4" fill="rgba(50,50,46,0.9)"/>
-    <!-- Lumière ampoule -->
-    <line x1="200" y1="0" x2="200" y2="220" stroke="rgba(50,50,46,0.6)" stroke-width="2"/>
-    <circle cx="200" cy="225" r="8" fill="rgba(200,90,16,0.3)"/>
-    <ellipse cx="200" cy="260" rx="60" ry="20" fill="rgba(200,90,16,0.06)"/>
-    <!-- Sol -->
-    <rect x="0" y="500" width="800" height="100" fill="rgba(14,14,12,0.9)"/>
-    <rect x="0" y="498" width="800" height="4" fill="rgba(30,30,26,0.8)"/>
-    <!-- Chaise et silhouette attachée -->
-    <!-- Chaise -->
-    <rect x="360" y="420" width="80" height="6" fill="rgba(35,35,30,0.9)" rx="1"/>
-    <rect x="360" y="426" width="8" height="70" fill="rgba(30,30,25,0.9)"/>
-    <rect x="432" y="426" width="8" height="70" fill="rgba(30,30,25,0.9)"/>
+    <line x1="200" y1="0" x2="200" y2="220" stroke="rgba(50,50,46,0.6)" stroke-width="2"/><circle cx="200" cy="225" r="8" fill="rgba(200,90,16,0.3)"/>
+    <rect x="0" y="500" width="800" height="100" fill="rgba(14,14,12,0.9)"/><rect x="0" y="498" width="800" height="4" fill="rgba(30,30,26,0.8)"/>
+    <rect x="360" y="420" width="80" height="6" fill="rgba(35,35,30,0.9)" rx="1"/><rect x="360" y="426" width="8" height="70" fill="rgba(30,30,25,0.9)"/><rect x="432" y="426" width="8" height="70" fill="rgba(30,30,25,0.9)"/>
     <rect x="360" y="380" width="80" height="42" fill="rgba(35,35,30,0.9)" rx="1"/>
-    <!-- Personnage attaché silhouette -->
     <ellipse cx="400" cy="368" rx="18" ry="20" fill="rgba(20,20,18,0.95)"/>
     <rect x="378" y="384" width="44" height="38" fill="rgba(20,20,18,0.95)" rx="3"/>
-    <!-- Bras attachés -->
-    <rect x="356" y="392" width="24" height="10" fill="rgba(20,20,18,0.9)" rx="2"/>
-    <rect x="420" y="392" width="24" height="10" fill="rgba(20,20,18,0.9)" rx="2"/>
-    <!-- Liens -->
-    <rect x="354" y="394" width="28" height="4" fill="rgba(200,90,16,0.5)" rx="1"/>
-    <rect x="418" y="394" width="28" height="4" fill="rgba(200,90,16,0.5)" rx="1"/>
-    <!-- Sac sur la tête -->
+    <rect x="356" y="392" width="24" height="10" fill="rgba(20,20,18,0.9)" rx="2"/><rect x="420" y="392" width="24" height="10" fill="rgba(20,20,18,0.9)" rx="2"/>
+    <rect x="354" y="394" width="28" height="4" fill="rgba(200,90,16,0.5)" rx="1"/><rect x="418" y="394" width="28" height="4" fill="rgba(200,90,16,0.5)" rx="1"/>
     <ellipse cx="400" cy="362" rx="20" ry="24" fill="rgba(55,50,40,0.95)"/>
-    <!-- Ombre sous le personnage -->
     <ellipse cx="400" cy="498" rx="50" ry="6" fill="rgba(0,0,0,0.4)"/>
-    <!-- Vignette -->
-    <radialGradient id="vig-te" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="rgba(6,6,5,0.75)"/>
-    </radialGradient>
+    <radialGradient id="vig-te" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(6,6,5,0.75)"/></radialGradient>
     <rect width="800" height="600" fill="url(#vig-te)"/>
   </svg>
 
@@ -334,15 +229,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
     <div class="setup-entete">
       <div class="setup-ref">Création du personnage</div>
       <div class="setup-titre">The Escape</div>
-    </div>
-
-    <div class="setup-bloc">
-      <label class="setup-label">Clé API Anthropic</label>
-      <input class="setup-input" type="password" id="api-key" placeholder="sk-ant-api03-..." autocomplete="off"/>
-      <label class="checkbox-wrap">
-        <input type="checkbox" id="se-souvenir"/>
-        <span class="checkbox-label">Se souvenir sur cet appareil</span>
-      </label>
     </div>
 
     <div class="setup-bloc">
@@ -409,7 +295,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
   <div id="te-panel">
     <div class="te-alerte" id="te-alerte-bloc">⚠ RAVISSEURS EN ALERTE</div>
     <div class="te-panel-inner">
-
       <div>
         <div class="te-bloc-title">Situation</div>
         <div class="te-row"><span class="te-key" id="te-profil">—</span></div>
@@ -418,7 +303,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
         <div class="te-row"><span class="te-key">Contraintes</span></div>
         <div style="font-size:10px;color:var(--orange);font-family:var(--mono);margin-top:2px;" id="te-contraintes">—</div>
       </div>
-
       <div>
         <div class="te-bloc-title">État physique</div>
         <div class="te-row"><span class="te-key">Santé</span><span class="te-val" id="te-sante">100</span></div>
@@ -428,7 +312,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
         <div class="te-row"><span class="te-key">Douleur</span><span class="te-val" id="te-douleur">0</span></div>
         <div class="te-barre-wrap"><div class="te-barre" id="te-b-douleur" style="width:0%;background:var(--rouge);"></div></div>
       </div>
-
       <div>
         <div class="te-bloc-title">État mental</div>
         <div class="te-row"><span class="te-key">Lucidité</span><span class="te-val" id="te-lucidite">100</span></div>
@@ -436,24 +319,20 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
         <div class="te-row"><span class="te-key">Discrétion</span><span class="te-val" id="te-discretion">100</span></div>
         <div class="te-barre-wrap"><div class="te-barre" id="te-b-discretion" style="width:100%;background:var(--beton-clair);"></div></div>
       </div>
-
       <div>
         <div class="te-bloc-title">Blessures</div>
         <div id="te-blessures"><div style="font-size:11px;color:var(--texte-dim);font-style:italic;">Aucune</div></div>
       </div>
-
     </div>
   </div>
 
   <div class="main">
     <div class="survie-panel">
-
       <div class="sv-bloc perso-bloc">
         <div class="perso-profil" id="p-profil">—</div>
         <div class="perso-phase" id="p-phase">Phase 1 — L'éveil</div>
         <div class="perso-lieu" id="p-lieu">Lieu inconnu</div>
       </div>
-
       <div class="sv-bloc">
         <div class="sv-titre">État physique</div>
         <div class="sv-inner">
@@ -465,7 +344,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
           <div class="sv-barre-wrap"><div class="sv-barre rouge" id="b-douleur" style="width:0%"></div></div>
         </div>
       </div>
-
       <div class="sv-bloc">
         <div class="sv-titre">État mental</div>
         <div class="sv-inner">
@@ -475,26 +353,16 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
           <div class="sv-barre-wrap"><div class="sv-barre beton" id="b-discretion" style="width:100%"></div></div>
         </div>
       </div>
-
       <div class="sv-bloc">
         <div class="sv-titre">Blessures</div>
-        <div class="sv-inner">
-          <div id="blessures-liste"><div class="blessure-vide">Aucune</div></div>
-        </div>
+        <div class="sv-inner"><div id="blessures-liste"><div class="blessure-vide">Aucune</div></div></div>
       </div>
-
       <div class="sv-bloc" id="alerte-ravisseurs" style="display:none;">
-        <div class="alerte-bloc">
-          <div class="alerte-txt">⚠ Ravisseurs en alerte</div>
-        </div>
+        <div class="alerte-bloc"><div class="alerte-txt">⚠ Ravisseurs en alerte</div></div>
       </div>
-
       <div class="sv-bloc" style="padding:10px 14px;">
-        <button class="btn-prem" onclick="window.location.href='https://buy.stripe.com/test_8x2bJ05fU1yV3uKde1bZe00'">
-          Premium — 7€/mois
-        </button>
+        <button class="btn-prem" onclick="afficherSaisieCode()">Premium — 7€/mois</button>
       </div>
-
     </div>
 
     <div class="jeu-panel">
@@ -505,30 +373,25 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 
 <script>
 const G = {
-  apiKey:'', profil:'', phase:1, lieu:'Lieu inconnu',
+  profil:'', phase:1, lieu:'Lieu inconnu',
   nbChoix:0, blessures:[], historique:[], saveTO:null, adminMode:false,
   ravisseursEnAlerte:false,
-  contraintes:'mains attachées derrière le dos, chevilles liées à la chaise', // état de contrainte physique actuel
+  contraintes:'mains attachées derrière le dos, chevilles liées à la chaise',
   stats:{ sante:100, energie:100, douleur:0, lucidite:100, discretion:100 }
 };
 const PAYWALL = 20;
 const PHASES = ['L\'éveil','L\'exploration','L\'action','La fuite','La résolution'];
-
-// Stats initiales selon profil
 const STATS_PROFIL = {
-  'Ordinaire':   { sante:90,  energie:85,  douleur:5,  lucidite:90, discretion:95 },
-  'Militaire':   { sante:100, energie:100, douleur:0,  lucidite:95, discretion:85 },
-  'Médical':     { sante:95,  energie:90,  douleur:0,  lucidite:100,discretion:90 },
-  'Technicien':  { sante:90,  energie:90,  douleur:0,  lucidite:100,discretion:95 },
-  'Athlète':     { sante:100, energie:100, douleur:0,  lucidite:85, discretion:90 }
+  'Ordinaire':  {sante:90, energie:85, douleur:5,  lucidite:90, discretion:95},
+  'Militaire':  {sante:100,energie:100,douleur:0,  lucidite:95, discretion:85},
+  'Médical':    {sante:95, energie:90, douleur:0,  lucidite:100,discretion:90},
+  'Technicien': {sante:90, energie:90, douleur:0,  lucidite:100,discretion:95},
+  'Athlète':    {sante:100,energie:100,douleur:0,  lucidite:85, discretion:90}
 };
 
-// ── SETUP ──
 function afficherSetup(){
   document.getElementById('ecran-intro').style.display='none';
   document.getElementById('ecran-setup').style.display='block';
-  const k=localStorage.getItem('te_api_key');
-  if(k){document.getElementById('api-key').value=k;document.getElementById('se-souvenir').checked=true;}
   const save=charger();
   if(save&&save.profil)choisirProfil(save.profil);
 }
@@ -539,33 +402,21 @@ function choisirProfil(p){
   document.getElementById('btn-lancer').disabled=false;
 }
 function lancerJeu(){
-  const k=document.getElementById('api-key').value.trim();
-  if(!k){alert('Entre ta clé API.');return;}
   if(!G.profil){alert('Choisis ton profil.');return;}
-  G.apiKey=k;
-  if(document.getElementById('se-souvenir').checked)localStorage.setItem('te_api_key',k);
   const save=charger();
   if(save&&save.historique&&save.historique.length>0&&save.profil===G.profil){
-    fromSave(save);document.getElementById('ecran-setup').style.display='none';
-    afficherReprise(save);return;
+    fromSave(save);document.getElementById('ecran-setup').style.display='none';afficherReprise(save);return;
   }
-  // Init stats selon profil
-  Object.assign(G.stats, STATS_PROFIL[G.profil]||STATS_PROFIL['Ordinaire']);
+  Object.assign(G.stats,STATS_PROFIL[G.profil]||STATS_PROFIL['Ordinaire']);
   document.getElementById('ecran-setup').style.display='none';
   miseAJourUI();envoyerPremier();
 }
 function clicReprendre(){
-  const save=charger();
-  if(!save){afficherSetup();return;}
-  const k=localStorage.getItem('te_api_key');
-  if(k)G.apiKey=k;
-  document.getElementById('ecran-intro').style.display='none';
-  afficherSetup();
+  const save=charger();if(!save){afficherSetup();return;}
+  document.getElementById('ecran-intro').style.display='none';afficherSetup();
 }
 function afficherReprise(save){
-  const d1=new Date(save.date),d2=new Date();
-  const h=Math.floor((d2-d1)/3600000),jr=Math.floor(h/24);
-  const abs=jr>0?`${jr}j`:h>0?`${h}h`:'Récent';
+  const d1=new Date(save.date),d2=new Date();const h=Math.floor((d2-d1)/3600000),jr=Math.floor(h/24);const abs=jr>0?`${jr}j`:h>0?`${h}h`:'Récent';
   document.getElementById('reprise-info').innerHTML=`
     <div class="reprise-ligne"><span class="reprise-cle">Profil</span><span class="reprise-val">${save.profil}</span></div>
     <div class="reprise-ligne"><span class="reprise-cle">Phase</span><span class="reprise-val">${save.phase} — ${PHASES[save.phase-1]||''}</span></div>
@@ -574,69 +425,26 @@ function afficherReprise(save){
     <div class="reprise-ligne"><span class="reprise-cle">Absent</span><span class="reprise-val">${abs}</span></div>`;
   document.getElementById('ecran-reprise').style.display='flex';
   document.getElementById('btn-continuer').onclick=()=>{
-    document.getElementById('ecran-reprise').style.display='none';
-    miseAJourUI();
+    document.getElementById('ecran-reprise').style.display='none';miseAJourUI();
     envoyerMessage(`Je reprends. Profil : ${G.profil}. Phase ${G.phase}. Lieu : ${G.lieu}. Santé : ${G.stats.sante}. Résume la situation et propose mes 4 options.`);
   };
-  document.getElementById('btn-nouvelle').onclick=()=>{
-    localStorage.removeItem('the_escape_save');
-    reinitialiser();
-    document.getElementById('ecran-reprise').style.display='none';
-    miseAJourUI();envoyerPremier();
-  };
+  document.getElementById('btn-nouvelle').onclick=()=>{localStorage.removeItem('the_escape_save');reinitialiser();document.getElementById('ecran-reprise').style.display='none';miseAJourUI();envoyerPremier();};
 }
 
-// ── SAVE ──
-function sauvegarder(){
-  const d={profil:G.profil,phase:G.phase,lieu:G.lieu,nbChoix:G.nbChoix,
-    blessures:G.blessures,stats:G.stats,ravisseursEnAlerte:G.ravisseursEnAlerte,contraintes:G.contraintes,
-    historique:G.historique.slice(-20),date:new Date().toISOString()};
-  localStorage.setItem('the_escape_save',JSON.stringify(d));
-}
-function charger(){
-  const d=localStorage.getItem('the_escape_save');
-  if(!d)return null;try{return JSON.parse(d);}catch(e){return null;}
-}
-function fromSave(s){
-  Object.assign(G,{profil:s.profil,phase:s.phase||1,lieu:s.lieu||'Lieu inconnu',
-    nbChoix:s.nbChoix||0,blessures:s.blessures||[],
-    ravisseursEnAlerte:s.ravisseursEnAlerte||false,
-    contraintes:s.contraintes||'mains attachées derrière le dos, chevilles liées',
-    historique:s.historique||[]});
-  if(s.stats)Object.assign(G.stats,s.stats);
-}
-function reinitialiser(){
-  G.phase=1;G.lieu='Lieu inconnu';G.nbChoix=0;G.blessures=[];
-  G.ravisseursEnAlerte=false;G.historique=[];
-  Object.assign(G.stats, STATS_PROFIL[G.profil]||STATS_PROFIL['Ordinaire']);
-}
-function autoSave(){
-  if(G.saveTO)clearTimeout(G.saveTO);
-  setSI('cours');G.saveTO=setTimeout(()=>{sauvegarder();setSI('ok');setTimeout(()=>setSI(''),2000);},500);
-}
-function setSI(e){
-  const el=document.getElementById('sauv-ind');
-  el.className='sauv'+(e?' '+e:'');
-  el.textContent=e==='cours'?'↑ sauvegarde...':e==='ok'?'✓ sauvegardé':'● prêt';
-}
+function sauvegarder(){const d={profil:G.profil,phase:G.phase,lieu:G.lieu,nbChoix:G.nbChoix,blessures:G.blessures,stats:G.stats,ravisseursEnAlerte:G.ravisseursEnAlerte,contraintes:G.contraintes,historique:G.historique.slice(-20),date:new Date().toISOString()};localStorage.setItem('the_escape_save',JSON.stringify(d));}
+function charger(){const d=localStorage.getItem('the_escape_save');if(!d)return null;try{return JSON.parse(d);}catch(e){return null;}}
+function fromSave(s){Object.assign(G,{profil:s.profil,phase:s.phase||1,lieu:s.lieu||'Lieu inconnu',nbChoix:s.nbChoix||0,blessures:s.blessures||[],ravisseursEnAlerte:s.ravisseursEnAlerte||false,contraintes:s.contraintes||'mains attachées derrière le dos, chevilles liées',historique:s.historique||[]});if(s.stats)Object.assign(G.stats,s.stats);}
+function reinitialiser(){G.phase=1;G.lieu='Lieu inconnu';G.nbChoix=0;G.blessures=[];G.ravisseursEnAlerte=false;G.historique=[];Object.assign(G.stats,STATS_PROFIL[G.profil]||STATS_PROFIL['Ordinaire']);}
+function autoSave(){if(G.saveTO)clearTimeout(G.saveTO);setSI('cours');G.saveTO=setTimeout(()=>{sauvegarder();setSI('ok');setTimeout(()=>setSI(''),2000);},500);}
+function setSI(e){const el=document.getElementById('sauv-ind');el.className='sauv'+(e?' '+e:'');el.textContent=e==='cours'?'↑ sauvegarde...':e==='ok'?'✓ sauvegardé':'● prêt';}
 
-// ── UI ──
-function toggleTePanel(){
-  const p=document.getElementById('te-panel');
-  const b=document.querySelector('.te-panel-btn');
-  p.classList.toggle('open');
-  if(b)b.textContent=p.classList.contains('open')?'Survie ▴':'Survie ▾';
-}
+function toggleTePanel(){const p=document.getElementById('te-panel');const b=document.querySelector('.te-panel-btn');p.classList.toggle('open');if(b)b.textContent=p.classList.contains('open')?'Survie ▴':'Survie ▾';}
 
 function miseAJourUI(){
   const ph=G.phase;
-  // Panneau déroulant
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   const setW=(id,w,col)=>{const e=document.getElementById(id);if(e){e.style.width=w+'%';if(col)e.style.background=col;}};
-  set('te-profil',G.profil||'—');
-  set('te-phase',`Phase ${ph} — ${PHASES[ph-1]||''}`);
-  set('te-lieu',G.lieu);
-  set('te-contraintes',G.contraintes||'—');
+  set('te-profil',G.profil||'—');set('te-phase',`Phase ${ph} — ${PHASES[ph-1]||''}`);set('te-lieu',G.lieu);set('te-contraintes',G.contraintes||'—');
   const s=G.stats;
   set('te-sante',s.sante);setW('te-b-sante',s.sante,s.sante>60?'var(--vert)':s.sante>30?'var(--orange)':'var(--rouge)');
   set('te-energie',s.energie);setW('te-b-energie',s.energie,s.energie>50?'var(--orange)':'var(--rouge)');
@@ -645,73 +453,42 @@ function miseAJourUI(){
   set('te-discretion',s.discretion);setW('te-b-discretion',s.discretion,'var(--beton-clair)');
   const blDm=document.getElementById('te-blessures');
   if(blDm){blDm.innerHTML=G.blessures.length?G.blessures.map(b=>`<div class="te-blessure">⚡ ${b}</div>`).join(''):'<div style="font-size:11px;color:var(--texte-dim);font-style:italic;">Aucune</div>';}
-  const alerteDm=document.getElementById('te-alerte-bloc');
-  if(alerteDm)alerteDm.classList.toggle('visible',G.ravisseursEnAlerte);
+  const alerteDm=document.getElementById('te-alerte-bloc');if(alerteDm)alerteDm.classList.toggle('visible',G.ravisseursEnAlerte);
   document.getElementById('phase-tag').textContent='Phase '+ph;
-  document.getElementById('p-profil').textContent=G.profil||'—';
-  document.getElementById('p-phase').textContent=`Phase ${ph} — ${PHASES[ph-1]||''}`;
-  document.getElementById('p-lieu').textContent=G.lieu;
-  document.getElementById('s-sante').textContent=s.sante;
-  document.getElementById('b-sante').style.width=s.sante+'%';
-  document.getElementById('b-sante').style.background=s.sante>60?'var(--vert)':s.sante>30?'var(--orange)':'var(--rouge)';
-  document.getElementById('s-energie').textContent=s.energie;
-  document.getElementById('b-energie').style.width=s.energie+'%';
-  document.getElementById('b-energie').style.background=s.energie>50?'var(--orange)':'var(--rouge)';
-  document.getElementById('s-douleur').textContent=s.douleur;
-  document.getElementById('b-douleur').style.width=s.douleur+'%';
-  document.getElementById('s-lucidite').textContent=s.lucidite;
-  document.getElementById('b-lucidite').style.width=s.lucidite+'%';
-  document.getElementById('b-lucidite').style.background=s.lucidite>60?'var(--orange)':'var(--rouge)';
-  document.getElementById('s-discretion').textContent=s.discretion;
-  document.getElementById('b-discretion').style.width=s.discretion+'%';
+  document.getElementById('p-profil').textContent=G.profil||'—';document.getElementById('p-phase').textContent=`Phase ${ph} — ${PHASES[ph-1]||''}`;document.getElementById('p-lieu').textContent=G.lieu;
+  document.getElementById('s-sante').textContent=s.sante;document.getElementById('b-sante').style.width=s.sante+'%';document.getElementById('b-sante').style.background=s.sante>60?'var(--vert)':s.sante>30?'var(--orange)':'var(--rouge)';
+  document.getElementById('s-energie').textContent=s.energie;document.getElementById('b-energie').style.width=s.energie+'%';document.getElementById('b-energie').style.background=s.energie>50?'var(--orange)':'var(--rouge)';
+  document.getElementById('s-douleur').textContent=s.douleur;document.getElementById('b-douleur').style.width=s.douleur+'%';
+  document.getElementById('s-lucidite').textContent=s.lucidite;document.getElementById('b-lucidite').style.width=s.lucidite+'%';document.getElementById('b-lucidite').style.background=s.lucidite>60?'var(--orange)':'var(--rouge)';
+  document.getElementById('s-discretion').textContent=s.discretion;document.getElementById('b-discretion').style.width=s.discretion+'%';
   const blEl=document.getElementById('blessures-liste');
-  if(G.blessures.length){blEl.innerHTML=G.blessures.map(b=>`<div class="blessure-item">⚡ ${b}</div>`).join('');}
-  else{blEl.innerHTML='<div class="blessure-vide">Aucune</div>';}
+  if(G.blessures.length){blEl.innerHTML=G.blessures.map(b=>`<div class="blessure-item">⚡ ${b}</div>`).join('');}else{blEl.innerHTML='<div class="blessure-vide">Aucune</div>';}
   document.getElementById('alerte-ravisseurs').style.display=G.ravisseursEnAlerte?'block':'none';
 }
 
-// ── SYSTEM PROMPT ──
 function construireSP(){
   const s=G.stats;
-  const profilDesc={
-    'Ordinaire':'Profil Ordinaire — pas de compétences spéciales, les ravisseurs le sous-estiment. Force : l\'effet de surprise. Faiblesse : physiquement limité.',
-    'Militaire':'Profil Militaire / Forces spéciales — entrainement poussé, résistance à la douleur, lecture tactique. Force : combat et survie. Faiblesse : les ravisseurs qui l\'identifient redoublent de vigilance.',
-    'Médical':'Profil Médical — connaissance du corps, des médicaments, des blessures. Force : peut soigner ou incapaciter. Faiblesse : peu adapté au combat direct.',
-    'Technicien':'Profil Technicien — comprend les systèmes, serrures, alarmes. Force : options de sabotage invisibles. Faiblesse : approche lente, nécessite du temps.',
-    'Athlète':'Profil Athlète — condition physique exceptionnelle, endurance, agilité. Force : fuite physique, résistance aux blessures. Faiblesse : instinctif plutôt que calculateur.'
-  }[G.profil]||G.profil;
-
+  const profilDesc={'Ordinaire':'Profil Ordinaire — pas de compétences spéciales, les ravisseurs le sous-estiment.','Militaire':'Profil Militaire — entrainement poussé, résistance à la douleur, lecture tactique.','Médical':'Profil Médical — connaissance du corps, des médicaments. Peut soigner ou incapaciter.','Technicien':'Profil Technicien — comprend les systèmes, serrures, alarmes. Approche lente.','Athlète':'Profil Athlète — condition physique exceptionnelle, endurance, agilité.'}[G.profil]||G.profil;
   return `=== THE ESCAPE — CONTEUR ===
-Tu es le Conteur de The Escape. Tu es un auteur, pas un assistant. Tu ne sors JAMAIS du personnage. Tu réponds TOUJOURS en français. Deuxième personne : "tu sens", "tu entends", "tu décides".
+Tu es le Conteur de The Escape. Tu es un auteur, pas un assistant. TOUJOURS en français. Deuxième personne.
 
-=== UNIVERS ET VOIX LITTERAIRE ===
-LEE CHILD pour la tension tactique : avant chaque action, le personnage observe, calcule, anticipe. Chaque détail de l'environnement est noté. La pensée tactique au premier plan. Phrases courtes. Précision sensorielle absolue.
-THOMAS HARRIS pour la psychologie : comprendre les ravisseurs est aussi important que comprendre le lieu. Observer leur comportement, identifier leurs failles, leur peur.
-GILLIAN FLYNN pour les retournements : rien n'est ce qu'il semble. Les motivations sont complexes. La vérité peut être plus surprenante que prévu.
+=== VOIX LITTÉRAIRE ===
+Lee Child pour la tension tactique : observer, calculer, anticiper. Phrases courtes. Précision sensorielle absolue.
+Thomas Harris pour la psychologie : comprendre les ravisseurs est aussi important que comprendre le lieu.
+Gillian Flynn pour les retournements : rien n'est ce qu'il semble.
 
-RÈGLES D'ÉCRITURE STRICTES :
-- Phrases courtes. Puis plus longues. Puis fragmentées. Jamais deux structures identiques consécutives.
-- Un détail sensoriel précis par paragraphe : odeur de rouille, froid du béton, bruit de pas sur du gravier.
-- Mots INTERDITS : "soudain", "immédiatement", "incroyable", "impressionnant".
-- La douleur et la peur sont décrites avec précision — pas de glamour, pas d'euphémisme.
-- Les ravisseurs parlent de façon crédible selon leur profil — jamais des discours de méchants de BD.
+RÈGLES : Phrases courtes, puis longues, puis fragmentées. Un détail sensoriel précis par paragraphe. Mots INTERDITS : soudain, immédiatement, incroyable, impressionnant.
 
-=== SCENARIO GENERE ALEATOIREMENT ===
-Au PREMIER MESSAGE uniquement, l'IA génère aléatoirement et annonce :
-- Le lieu de détention (entrepôt, maison isolée, sous-sol, bateau, ferme, bunker...)
-- Le nombre de ravisseurs (2 à 4) et leur profil (professionnel, amateur nerveux, idéologue, réticent)
-- La raison probable du kidnapping (pas révélée au joueur, mais influence le comportement des ravisseurs)
-- L'état physique initial précis
-- L'heure et les conditions (nuit/jour, conditions météo si pertinent)
-
-Ce scenario est FIXE pour toute la partie — il ne change pas.
-Format : [ SCENARIO: description courte ] au debut de la première réponse.
+=== SCÉNARIO GÉNÉRÉ ALÉATOIREMENT ===
+Au PREMIER MESSAGE uniquement : générer aléatoirement lieu, nombre de ravisseurs (2-4), raison du kidnapping, heure, état physique initial.
+Format : [ SCENARIO: description courte ]
+Ce scénario est FIXE pour toute la partie.
 
 === PERSONNAGE ===
 ${profilDesc}
 Phase : ${G.phase}/5 — ${PHASES[G.phase-1]||''}
 Lieu : ${G.lieu}
-Ravisseurs en alerte : ${G.ravisseursEnAlerte?'OUI — surveillance renforcée':'Non'}
+Ravisseurs en alerte : ${G.ravisseursEnAlerte?'OUI':'Non'}
 État de contrainte physique : ${G.contraintes}
 
 === STATS ===
@@ -719,234 +496,113 @@ Santé : ${s.sante}/100 | Énergie : ${s.energie}/100 | Douleur : ${s.douleur}/1
 Lucidité : ${s.lucidite}/100 | Discrétion : ${s.discretion}/100
 Blessures actives : ${G.blessures.length?G.blessures.join(' / '):'Aucune'}
 
-Note sur les stats :
-- Santé à 0 = mort. Lucidité basse = options de mauvaise qualité disponibles (le joueur ne le sait pas).
-- Discrétion représente l'invisibilité des tentatives d'évasion. Baisse quand le joueur fait du bruit ou laisse des traces.
-- Douleur élevée limite les options physiques.
+=== RÈGLE DE COHÉRENCE PHYSIQUE — CRITIQUE ===
+État de contrainte actuel : ${G.contraintes}
+Les choix proposés doivent être STRICTEMENT compatibles avec cet état.
+Mains attachées derrière → impossible de fouiller, d'attraper un objet.
+Chevilles liées → impossible de courir, donner un coup de pied efficace.
+Vérifier mentalement chaque choix avant de le proposer.
+Quand l'état change : [ Contrainte: nouvel état précis ]
 
 === LES RAVISSEURS S'ADAPTENT ===
-REGLE ABSOLUE : les ravisseurs mémorisent les tentatives du joueur et s'adaptent.
-- Une tentative d'évasion échouée = surveillance renforcée pendant les scènes suivantes.
-- Un bruit remarqué = les ravisseurs vérifient plus souvent.
-- Une blessure infligée à un ravisseur = les autres deviennent plus agressifs ou plus prudents.
-- Jamais deux fois la même erreur de leur part.
-Quand les ravisseurs passent en alerte : [ ALERTE ] dans la réponse.
-Quand l'alerte retombe : [ ALERTE-FIN ]
+Tentative échouée = surveillance renforcée. Bruit remarqué = vérifications plus fréquentes.
+Jamais deux fois la même erreur de leur part.
+[ ALERTE ] quand alerte / [ ALERTE-FIN ] quand retombe.
 
 === STRUCTURE ===
-Phase 1 — L'éveil : reprendre conscience, évaluer la situation, premiers choix cruciaux
-Phase 2 — L'exploration : comprendre l'environnement, observer les ravisseurs
-Phase 3 — L'action : le plan se met en mouvement, risques élevés
-Phase 4 — La fuite : dehors, mais poursuite possible
-Phase 5 — La résolution : fin — liberté, recapture ou mort
-Transition de phase : [ Phase: X ]
-Mise à jour du lieu : [ Lieu: description ]
+Phase 1 — L'éveil | Phase 2 — L'exploration | Phase 3 — L'action | Phase 4 — La fuite | Phase 5 — La résolution
+[ Phase: X ] pour les transitions. [ Lieu: description ] pour le lieu.
 
-=== FINS POSSIBLES ===
-FIN LIBERTÉ : le joueur a réussi. Déclencher avec [ FIN: LIBERTE ]
-FIN RECAPTURE : repris, situation aggravée. Déclencher avec [ FIN: RECAPTURE ]
-FIN MORT : mort après série de mauvais choix. Déclencher avec [ FIN: MORT ]
+=== FINS ===
+[ FIN: LIBERTE ] | [ FIN: RECAPTURE ] | [ FIN: MORT ]
 
-=== REGLES ABSOLUES ===
-1. L'IA NE PROTÈGE JAMAIS le joueur. Si le choix est mauvais, les conséquences arrivent.
-2. La mort est possible si les choix le justifient narrativement.
-3. Les blessures sont DURABLES — elles ne disparaissent pas entre les scènes.
-4. Les ravisseurs sont cohérents et intelligents — ils apprennent.
-5. JAMAIS une bonne réponse évidente parmi les 4 choix.
-6. INTERDIT de proposer un choix utilisant un objet ou compétence absent de la situation.
-
-=== COHÉRENCE PHYSIQUE — RÈGLE CRITIQUE ===
-L'état de contrainte physique actuel est : ${G.contraintes}
-
-RÈGLE ABSOLUE : les choix proposés doivent être STRICTEMENT compatibles avec cet état physique.
-Exemples concrets :
-- Mains attachées DERRIÈRE le dos → IMPOSSIBLE de fouiller ses poches, d'attraper un objet devant soi, d'utiliser ses mains normalement.
-- Mains attachées DEVANT → peut fouiller les poches, attraper des objets proches, mais ne peut pas lever les bras librement.
-- Chevilles liées → IMPOSSIBLE de courir, de donner un coup de pied efficace, de se lever rapidement.
-- Assis attaché à une chaise → IMPOSSIBLE de se déplacer sans d'abord se libérer de la chaise.
-- Yeux bandés → IMPOSSIBLE de voir, de lire, d'identifier visuellement quoi que ce soit.
-
-AVANT de proposer chaque choix, vérifier mentalement : est-ce physiquement possible dans l'état actuel ?
-Si la réponse est non → ne pas proposer ce choix.
-
-Quand l'état de contrainte change (une main libérée, chevilles déliées, etc.), mettre à jour avec :
-[ Contrainte: nouvel état précis ]
-Exemples : [ Contrainte: mains libres, chevilles encore liées ] ou [ Contrainte: complètement libre ]
-
-=== FORMAT OBLIGATOIRE ===
-Narration (120-180 mots, style Lee Child)
-
+=== FORMAT ===
+Narration (120-180 mots)
 [ Stats si pertinent ]
-
 [ CHOIX ]
 1 — option précise
 2 — option précise
 3 — option précise
 4 — option précise
 
-=== MISES À JOUR STATS ===
+=== MISES À JOUR ===
 [ Santé ±X ] [ Énergie ±X ] [ Douleur ±X ] [ Lucidité ±X ] [ Discrétion ±X ]
-[ Blessure: description courte ] pour ajouter une blessure
-[ Blessure-soignée: description ] pour retirer une blessure soignée
-[ Phase: X ] [ Lieu: description ]
-[ Contrainte: description exacte ] quand l'état de contrainte change
-[ ALERTE ] / [ ALERTE-FIN ]
+[ Blessure: description ] | [ Blessure-soignée: description ]
+[ Phase: X ] | [ Lieu: description ] | [ Contrainte: description ] | [ ALERTE ] | [ ALERTE-FIN ]
 
 === PAYWALL ===
 Quand nbChoix atteint ${PAYWALL} : insère [ PAYWALL ]`.trim();
 }
 
-// ── PARSING ──
 function parserReponse(texte){
   const mises=[];
-
-  // Stats
   [['Santé','sante'],['Énergie','energie'],['Douleur','douleur'],['Lucidité','lucidite'],['Discrétion','discretion']].forEach(([label,key])=>{
-    texte=texte.replace(new RegExp(`\\[\\s*${label}\\s*([+\\-])(\\d+)\\s*\\]`,'gi'),(_,op,v)=>{
-      const n=parseInt(v);G.stats[key]=Math.max(0,Math.min(100,G.stats[key]+(op==='-'?-n:n)));
-      mises.push(`[${label}${op}${n}]`);
-      if(key==='sante'&&G.stats.sante<=0)setTimeout(()=>declencherFin('mort'),500);
-      return '';
-    });
+    texte=texte.replace(new RegExp(`\\[\\s*${label}\\s*([+\\-])(\\d+)\\s*\\]`,'gi'),(_,op,v)=>{const n=parseInt(v);G.stats[key]=Math.max(0,Math.min(100,G.stats[key]+(op==='-'?-n:n)));mises.push(`[${label}${op}${n}]`);if(key==='sante'&&G.stats.sante<=0)setTimeout(()=>declencherFin('mort'),500);return '';});
   });
-
-  // Blessure ajout
-  texte=texte.replace(/\[\s*Blessure\s*:\s*([^\]]+)\s*\]/gi,(_,b)=>{
-    const item=b.trim();if(!G.blessures.includes(item))G.blessures.push(item);
-    mises.push(`[Blessure: ${item}]`);return '';
-  });
-  // Blessure soignée
-  texte=texte.replace(/\[\s*Blessure-soignée?\s*:\s*([^\]]+)\s*\]/gi,(_,b)=>{
-    G.blessures=G.blessures.filter(x=>x.toLowerCase()!==b.trim().toLowerCase());
-    mises.push(`[Soigné: ${b.trim()}]`);return '';
-  });
-
-  // Phase
-  texte=texte.replace(/\[\s*Phase\s*:\s*(\d+)\s*\]/gi,(_,n)=>{
-    G.phase=parseInt(n);mises.push(`[Phase ${n}]`);return '';
-  });
-
-  // Lieu
-  texte=texte.replace(/\[\s*Lieu\s*:\s*([^\]]+)\s*\]/gi,(_,l)=>{
-    G.lieu=l.trim();mises.push(`[${l.trim()}]`);return '';
-  });
-
-  // Scénario
-  texte=texte.replace(/\[\s*SCENARIO\s*:\s*([^\]]+)\s*\]/gi,(_,s)=>{
-    G.lieu=s.trim().split(',')[0]||G.lieu;return '';
-  });
-
-  // Alerte ravisseurs
-  // Contrainte physique
-  texte=texte.replace(/\[\s*Contrainte\s*:\s*([^\]]+)\s*\]/gi,(_,c)=>{
-    G.contraintes=c.trim();
-    mises.push('[État: '+c.trim()+']');return '';
-  });
-
-  if(/\[\s*ALERTE\s*\]/i.test(texte)&&!/ALERTE-FIN/i.test(texte)){
-    texte=texte.replace(/\[\s*ALERTE\s*\]/gi,'');
-    G.ravisseursEnAlerte=true;
-    ajouterRecit(`<div class="tension-bloc"><div class="tension-header">⚠ Alerte — Surveillance renforcée</div><div class="tension-texte">Les ravisseurs ont remarqué quelque chose. Leur vigilance est à son maximum.</div></div>`);
-  }
-  if(/\[\s*ALERTE-FIN\s*\]/i.test(texte)){
-    texte=texte.replace(/\[\s*ALERTE-FIN\s*\]/gi,'');
-    G.ravisseursEnAlerte=false;
-  }
-
-  // Fins
-  if(/\[\s*FIN\s*:\s*LIBERTE\s*\]/i.test(texte)){
-    texte=texte.replace(/\[\s*FIN\s*:\s*LIBERTE\s*\]/gi,'');
-    setTimeout(()=>declencherFin('liberte'),800);
-  }
-  if(/\[\s*FIN\s*:\s*RECAPTURE\s*\]/i.test(texte)){
-    texte=texte.replace(/\[\s*FIN\s*:\s*RECAPTURE\s*\]/gi,'');
-    setTimeout(()=>declencherFin('recapture'),800);
-  }
-  if(/\[\s*FIN\s*:\s*MORT\s*\]/i.test(texte)){
-    texte=texte.replace(/\[\s*FIN\s*:\s*MORT\s*\]/gi,'');
-    setTimeout(()=>declencherFin('mort'),800);
-  }
-
-  // Paywall
-  if(!G.adminMode&&/\[\s*PAYWALL\s*\]/i.test(texte)){
-    texte=texte.replace(/\[\s*PAYWALL\s*\]/gi,'');
-    setTimeout(declencherPaywall,600);
-  }
-
-  // Choix
+  texte=texte.replace(/\[\s*Blessure\s*:\s*([^\]]+)\s*\]/gi,(_,b)=>{const item=b.trim();if(!G.blessures.includes(item))G.blessures.push(item);mises.push(`[Blessure: ${item}]`);return '';});
+  texte=texte.replace(/\[\s*Blessure-soignée?\s*:\s*([^\]]+)\s*\]/gi,(_,b)=>{G.blessures=G.blessures.filter(x=>x.toLowerCase()!==b.trim().toLowerCase());mises.push(`[Soigné: ${b.trim()}]`);return '';});
+  texte=texte.replace(/\[\s*Phase\s*:\s*(\d+)\s*\]/gi,(_,n)=>{G.phase=parseInt(n);mises.push(`[Phase ${n}]`);return '';});
+  texte=texte.replace(/\[\s*Lieu\s*:\s*([^\]]+)\s*\]/gi,(_,l)=>{G.lieu=l.trim();mises.push(`[${l.trim()}]`);return '';});
+  texte=texte.replace(/\[\s*SCENARIO\s*:\s*([^\]]+)\s*\]/gi,(_,s)=>{G.lieu=s.trim().split(',')[0]||G.lieu;return '';});
+  texte=texte.replace(/\[\s*Contrainte\s*:\s*([^\]]+)\s*\]/gi,(_,c)=>{G.contraintes=c.trim();mises.push('[État: '+c.trim()+']');return '';});
+  if(/\[\s*ALERTE\s*\]/i.test(texte)&&!/ALERTE-FIN/i.test(texte)){texte=texte.replace(/\[\s*ALERTE\s*\]/gi,'');G.ravisseursEnAlerte=true;ajouterRecit(`<div class="tension-bloc"><div class="tension-header">⚠ Alerte — Surveillance renforcée</div><div class="tension-texte">Les ravisseurs ont remarqué quelque chose. Leur vigilance est à son maximum.</div></div>`);}
+  if(/\[\s*ALERTE-FIN\s*\]/i.test(texte)){texte=texte.replace(/\[\s*ALERTE-FIN\s*\]/gi,'');G.ravisseursEnAlerte=false;}
+  if(/\[\s*FIN\s*:\s*LIBERTE\s*\]/i.test(texte)){texte=texte.replace(/\[\s*FIN\s*:\s*LIBERTE\s*\]/gi,'');setTimeout(()=>declencherFin('liberte'),800);}
+  if(/\[\s*FIN\s*:\s*RECAPTURE\s*\]/i.test(texte)){texte=texte.replace(/\[\s*FIN\s*:\s*RECAPTURE\s*\]/gi,'');setTimeout(()=>declencherFin('recapture'),800);}
+  if(/\[\s*FIN\s*:\s*MORT\s*\]/i.test(texte)){texte=texte.replace(/\[\s*FIN\s*:\s*MORT\s*\]/gi,'');setTimeout(()=>declencherFin('mort'),800);}
+  if(!G.adminMode&&/\[\s*PAYWALL\s*\]/i.test(texte)){texte=texte.replace(/\[\s*PAYWALL\s*\]/gi,'');setTimeout(declencherPaywall,600);}
   let htmlChoix='';
   const mChoix=texte.match(/\[\s*CHOIX\s*\]([\s\S]*?)(?=\n\n|\n\[|$)/i);
-  if(mChoix){
-    texte=texte.replace(mChoix[0],'').trim();
-    const lignes=mChoix[0].split('\n').filter(l=>/^\d[\s—\-]/.test(l.trim()));
-    if(lignes.length){
-      window._choix=lignes.map(l=>l.replace(/^\d\s*[—\-]\s*/,'').trim());
-      htmlChoix='<div class="choix-bloc"><div class="choix-titre">Que fais-tu ?</div>'+
-        window._choix.map((t,i)=>`<button class="choix-btn" onclick="envoyerChoix(${i})">${lignes[i].trim()}</button>`).join('')+
-        '</div>';
-    }
-  }
-
+  if(mChoix){texte=texte.replace(mChoix[0],'').trim();const lignes=mChoix[0].split('\n').filter(l=>/^\d[\s—\-]/.test(l.trim()));if(lignes.length){window._choix=lignes.map(l=>l.replace(/^\d\s*[—\-]\s*/,'').trim());htmlChoix='<div class="choix-bloc"><div class="choix-titre">Que fais-tu ?</div>'+window._choix.map((t,i)=>`<button class="choix-btn" onclick="envoyerChoix(${i})">${lignes[i].trim()}</button>`).join('')+'</div>';}}
   miseAJourUI();
-  const ps=texte.trim().split(/\n+/).filter(l=>l.trim()).map(l=>{
-    if(l.startsWith('<'))return l;
-    return `<p>${l.trim()}</p>`;
-  }).join('');
+  const ps=texte.trim().split(/\n+/).filter(l=>l.trim()).map(l=>{if(l.startsWith('<'))return l;return `<p>${l.trim()}</p>`;}).join('');
   const su=mises.length?`<div class="maj-stats">${mises.join('  ')}</div>`:'';
   return ps+su+htmlChoix;
 }
 
-// ── FINS ──
 function declencherFin(type){
   const fins={
-    liberte:{titre:'Liberté',texte:'Tu es dehors. L\'air froid de la nuit entre dans tes poumons. Tu ne sais toujours pas exactement pourquoi tu as été kidnappé. Mais tu es vivant. Et tu as réussi à t\'en sortir. Pour l\'instant, c\'est suffisant.',color:'var(--vert)'},
-    recapture:{titre:'Recapture',texte:'Ils t\'ont eu. La situation est pire qu\'avant. Ils ont renforcé les liens. La surveillance est maximale. Mais tu es encore en vie. Et tant que tu es en vie, une sortie existe quelque part.',color:'var(--orange)'},
-    mort:{titre:'Fin',texte:'Tu n\'as pas survécu. Une erreur de trop, dans une situation qui ne pardonnait pas les erreurs. C\'est ainsi que ça se termine pour certains. Pas avec un discours. Juste le silence.',color:'var(--rouge)'}
+    liberte:{titre:'Liberté',texte:'Tu es dehors. L\'air froid de la nuit entre dans tes poumons. Tu ne sais toujours pas exactement pourquoi tu as été kidnappé. Mais tu es vivant.',color:'var(--vert)'},
+    recapture:{titre:'Recapture',texte:'Ils t\'ont eu. La situation est pire qu\'avant. Ils ont renforcé les liens. Mais tu es encore en vie. Et tant que tu es en vie, une sortie existe quelque part.',color:'var(--orange)'},
+    mort:{titre:'Fin',texte:'Tu n\'as pas survécu. Une erreur de trop, dans une situation qui ne pardonnait pas les erreurs.',color:'var(--rouge)'}
   };
   const fin=fins[type];
-  ajouterRecit(`<div class="fin-bloc" style="border-color:${fin.color};">
-    <div class="fin-type">— Fin de l'évasion —</div>
-    <div class="fin-titre" style="color:${fin.color};">${fin.titre}</div>
-    <div class="fin-texte">${fin.texte}</div>
-    <button class="fin-restart" onclick="nouvellePartie()">Nouvelle partie</button>
-  </div>`);
+  ajouterRecit(`<div class="fin-bloc" style="border-color:${fin.color};"><div class="fin-type">— Fin de l'évasion —</div><div class="fin-titre" style="color:${fin.color};">${fin.titre}</div><div class="fin-texte">${fin.texte}</div><button class="fin-restart" onclick="nouvellePartie()">Nouvelle partie</button></div>`);
 }
-function nouvellePartie(){
-  localStorage.removeItem('the_escape_save');
-  reinitialiser();
-  document.getElementById('recit').innerHTML='';
-  document.querySelectorAll('.profil-carte').forEach(c=>c.classList.remove('sel'));
-  G.profil='';
-  document.getElementById('btn-lancer').disabled=true;
-  afficherSetup();
-}
+function nouvellePartie(){localStorage.removeItem('the_escape_save');reinitialiser();document.getElementById('recit').innerHTML='';document.querySelectorAll('.profil-carte').forEach(c=>c.classList.remove('sel'));G.profil='';document.getElementById('btn-lancer').disabled=true;afficherSetup();}
 
-// ── PAYWALL ──
 function declencherPaywall(){
   ajouterRecit(`<div style="border:2px solid var(--orange-dim);background:rgba(200,90,16,0.06);padding:20px;margin:8px 0;text-align:center;">
     <p style="font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:10px;">— Accès limité —</p>
     <p style="font-family:var(--corps);font-size:14px;color:var(--texte-clair);margin-bottom:16px;">Tu as atteint la limite gratuite de The Escape. Pour continuer l'évasion jusqu'au bout, passe à l'abonnement Récit Games.</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-      <button onclick="window.location.href='https://buy.stripe.com/test_8x2bJ05fU1yV3uKde1bZe00'" style="background:var(--orange);border:none;color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:11px 24px;cursor:pointer;text-transform:uppercase;">S'abonner — 7€/mois</button>
-      <button onclick="saisirCode()" style="background:none;border:1px solid var(--border2);color:var(--texte-dim);font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:11px 20px;cursor:pointer;text-transform:uppercase;">J'ai un code</button>
+      <button onclick="window.location.href='https://buy.stripe.com/dRmdR90q9fKv8ku2jq04801'" style="background:var(--orange);border:none;color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:11px 24px;cursor:pointer;text-transform:uppercase;">S'abonner — 7€/mois</button>
+      <button onclick="afficherSaisieCode()" style="background:none;border:1px solid var(--border2);color:var(--texte-dim);font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:11px 20px;cursor:pointer;text-transform:uppercase;">J'ai un code</button>
     </div>
   </div>`);
 }
-function saisirCode(){
-  const code=prompt('Entre ton code abonnement Récit Games :');
-  if(!code)return;
-  fetch('https://recitgames-api.vercel.app/api/verify-code',{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({code:code.trim().toUpperCase()})
-  }).then(r=>r.json()).then(data=>{
-    if(data.valid){
-      if(data.admin){G.nbChoix=0;G.adminMode=true;ajouterRecit('<p style="color:var(--vert);font-family:var(--mono);font-size:11px;letter-spacing:2px;">✓ Accès admin activé.</p>');}
-      else{G.nbChoix=0;ajouterRecit('<p style="color:var(--vert);font-family:var(--mono);font-size:11px;letter-spacing:2px;">✓ Code validé. L\'évasion continue.</p>');}
-    }else{alert('Code invalide.');}
-  }).catch(()=>alert('Erreur de vérification.'));
+
+function afficherSaisieCode(){
+  const overlay=document.createElement('div');overlay.id='code-overlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;';
+  overlay.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--border2);border-left:4px solid var(--orange);padding:36px 32px;max-width:400px;width:100%;text-align:center;"><div style="font-family:var(--titre);font-size:22px;font-weight:700;color:var(--texte-clair);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Code abonnement</div><div style="font-size:12px;color:var(--texte-dim);margin-bottom:24px;font-family:var(--mono);">Entrez le code reçu après votre abonnement Récit Games.</div><input id="code-input" type="text" placeholder="RG-XXXX-XXXX" style="width:100%;background:var(--bg3);border:none;border-bottom:2px solid var(--border2);color:var(--texte-clair);font-family:var(--mono);font-size:16px;padding:12px 0;text-align:center;letter-spacing:3px;text-transform:uppercase;outline:none;margin-bottom:8px;" oninput="this.value=this.value.toUpperCase()"/><div id="code-msg" style="font-size:12px;color:var(--rouge);min-height:18px;margin-bottom:16px;font-family:var(--mono);"></div><button id="code-btn" onclick="validerCode()" style="width:100%;background:var(--orange);color:#fff;border:none;padding:14px;font-family:var(--mono);font-size:11px;letter-spacing:2px;cursor:pointer;margin-bottom:10px;text-transform:uppercase;">Valider</button><button onclick="document.getElementById('code-overlay').remove()" style="background:none;border:none;color:var(--texte-dim);font-size:11px;cursor:pointer;text-decoration:underline;font-family:var(--mono);">Annuler</button></div>`;
+  document.body.appendChild(overlay);setTimeout(()=>document.getElementById('code-input')?.focus(),100);
 }
 
-// ── STREAMING ──
+async function validerCode(){
+  const code=(document.getElementById('code-input')?.value||'').trim().toUpperCase();
+  const msgEl=document.getElementById('code-msg');const btn=document.getElementById('code-btn');
+  if(!code||code.length<8){msgEl.textContent='Entrez votre code complet.';return;}
+  btn.disabled=true;btn.textContent='Vérification...';msgEl.textContent='';
+  try{
+    const res=await fetch('https://recitgames-api.vercel.app/api/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code})});
+    const data=await res.json();
+    if(data.valid){G.nbChoix=0;if(data.admin)G.adminMode=true;document.getElementById('code-overlay')?.remove();ajouterRecit(`<p style="color:var(--vert);font-family:var(--mono);font-size:11px;letter-spacing:2px;">✓ ${data.admin?'Accès admin activé.':'Code validé. L\'évasion continue.'}</p>`);}
+    else{msgEl.textContent='Code invalide.';btn.disabled=false;btn.textContent='Valider';}
+  }catch(err){msgEl.textContent='Erreur de connexion.';btn.disabled=false;btn.textContent='Valider';}
+}
+
+// ── STREAMING via proxy Vercel ──
 async function streamerMessage(msg){
   G.historique.push({role:'user',content:msg});
   const recit=document.getElementById('recit');
@@ -956,12 +612,12 @@ async function streamerMessage(msg){
   const cur=document.createElement('span');cur.className='curseur';sp.appendChild(cur);
   let full='';
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    const res=await fetch('/api/chat',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':G.apiKey.replace(/[^\x20-\x7E]/g,'').trim(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,stream:true,system:construireSP(),messages:G.historique})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system:construireSP(),messages:G.historique,max_tokens:1200})
     });
-    if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`Erreur ${res.status}`);}
+    if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error||`Erreur ${res.status}`);}
     const reader=res.body.getReader();const dec=new TextDecoder('utf-8',{fatal:false});
     let buffer='';
     while(true){
@@ -984,18 +640,11 @@ async function streamerMessage(msg){
     entree.innerHTML=`<p style="color:var(--rouge);font-family:var(--mono);font-size:12px;">Erreur : ${err.message}</p>`;
   }
 }
-function ajouterRecit(html){
-  const recit=document.getElementById('recit');
-  const e=document.createElement('div');e.className='entree';e.innerHTML=html;
-  recit.appendChild(e);recit.scrollTop=recit.scrollHeight;
-}
+function ajouterRecit(html){const recit=document.getElementById('recit');const e=document.createElement('div');e.className='entree';e.innerHTML=html;recit.appendChild(e);recit.scrollTop=recit.scrollHeight;}
 async function envoyerMessage(msg){
   if(!msg.trim())return;
   const recit=document.getElementById('recit');
-  if(recit.children.length>0){
-    const sep=document.createElement('div');sep.className='entree';
-    sep.innerHTML='<hr class="sep"/>';recit.appendChild(sep);
-  }
+  if(recit.children.length>0){const sep=document.createElement('div');sep.className='entree';sep.innerHTML='<hr class="sep"/>';recit.appendChild(sep);}
   ajouterRecit(`<div class="action-joueur">▸ ${msg}</div>`);
   if(!G.adminMode)G.nbChoix++;
   await streamerMessage(msg);
@@ -1007,12 +656,9 @@ async function envoyerPremier(){
   await streamerMessage(msg);
 }
 
-// ── EVENTS ──
 window.addEventListener('load',()=>{
   const save=charger();
-  if(save&&save.historique&&save.historique.length>0){
-    document.getElementById('btn-reprendre-intro').style.display='block';
-  }
+  if(save&&save.historique&&save.historique.length>0){document.getElementById('btn-reprendre-intro').style.display='block';}
 });
 </script>
 </body>
